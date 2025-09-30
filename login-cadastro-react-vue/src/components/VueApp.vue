@@ -1,44 +1,50 @@
 <script setup>
-    import { ref } from 'vue';
+import { reactive, onMounted } from 'vue';
 
-    const formState = ref({
-        nome: "",
-        email: "",
-        senha: "",
-        telefone: "",
-        nascimento: ""
-    })
+onMounted(() => {
+    localStorage.removeItem("usuarios")
+    if (!localStorage.getItem("usuarios")) {
+        const inicial = [
+            {
+                nome: "Pedro",
+                email: "pedro@gmail.com",
+                senha: "dadwda",
+                telefone: "1232312",
+                nascimento: ""
+            }
+        ]
+        localStorage.setItem("usuarios", JSON.stringify(inicial))
+    }
+}
+)
 
-    const handleChange = (e) => {
-    const {name, value} = e.target
+const formState = reactive({
+    nome: "",
+    email: "",
+    senha: "",
+    telefone: "",
+    nascimento: ""
+})
 
-    formState = ({
-      ...formState,
-      [name]: value
-    })
-  }
+const handleClean = () => {
+    formState.nome = "",
+        formState.email = "",
+        formState.senha = "",
+        formState.telefone = "",
+        formState.nascimento = ""
+}
 
-  const handleClean = () => {
-    formState = ({
-        nome: "",
-        email: "",
-        senha: "",
-        telefone: "",
-        nascimento: ""
-    })
-  }
-
-  const handleSubmit = (e) => {
+const handleSubmit = (e) => {
     e.preventDefault();
 
     const usuarios = JSON.parse(localStorage.getItem("usuarios"));
 
-    usuarios.push({ ...formState.value })
+    usuarios.push({ ...formState })
 
     localStorage.setItem("usuarios", JSON.stringify(usuarios, null, 2))
 
     handleClean()
-  }
+}
 
 </script>
 
@@ -70,7 +76,7 @@
 </template>
 
 <style scoped>
-    form {
+form {
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -82,16 +88,16 @@
     height: fit-content;
 
     padding: 10%;
-    }
+}
 
-    form .campo {
+form .campo {
     display: flex;
     flex-direction: column;
 
     font-family: Arial, Helvetica, sans-serif;
-    }
+}
 
-    form button {
+form button {
     background-color: rgb(20, 122, 218);
     border: none;
     color: white;
@@ -99,5 +105,5 @@
     padding: 2%;
 
     border-radius: 5px;
-    }
+}
 </style>
