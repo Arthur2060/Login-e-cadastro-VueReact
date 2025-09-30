@@ -1,0 +1,30 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  border: solid rgba(128, 128, 128, 0.726) 2px;
+  border-radius: 10px;
+
+  width: fit-content;
+  height: fit-content;
+
+  padding: 10%;
+}
+
+form .campo {
+  display: flex;
+  flex-direction: column;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+form button {
+  background-color: rgb(20, 122, 218);
+  border: none;
+  color: white;
+
+  padding: 2%;
+
+  border-radius: 5px;
+}
