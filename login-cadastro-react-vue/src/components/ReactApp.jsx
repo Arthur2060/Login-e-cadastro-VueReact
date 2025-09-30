@@ -24,7 +24,17 @@ export default function ReactApp() {
   }
 
   const handleSubmit = (e) => {
-    const data = JSON.parse(localStorage.getItem("usuario"));
+    e.preventDefault();
+
+    const usuarios = JSON.parse(localStorage.getItem("usuario"));
+
+    usuarios.array.forEach(element => {
+      if (element.email == formState.email && element.senha == formState.senha) {
+        alert(element)
+      } else {
+        alert("E-mail ou senha incorretos!")
+      }
+    });
 
     handleClean()
   }
