@@ -37,11 +37,13 @@ const handleClean = () => {
 const handleSubmit = (e) => {
     e.preventDefault();
 
-    const usuarios = JSON.parse(localStorage.getItem("usuarios"));
-
+    const usuarios = JSON.parse(localStorage.getItem("usuarios"))
+    
     usuarios.push({ ...formState })
 
     localStorage.setItem("usuarios", JSON.stringify(usuarios, null, 2))
+
+    console.log("Usuario salvo com exito!")
 
     handleClean()
 }
